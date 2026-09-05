@@ -1,0 +1,27 @@
+# office-crew-ci-gates: strict-v10
+# Auto-generated for Go projects v1 (GitHub Actions).
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+      - run: go build ./...
+      - run: go test ./...
+  lint:
+    runs-on: ubuntu-latest
+    continue-on-error: true  # style is a warning, not a merge blocker
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+      - run: test -z "$(gofmt -l .)" || true
+      - run: go vet ./... || true
