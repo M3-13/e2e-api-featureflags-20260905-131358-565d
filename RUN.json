@@ -1,0 +1,15 @@
+{
+  "runcontract": 1,
+  "services": [
+    {
+      "name": "flag-service",
+      "dir": ".",
+      "stack": "go",
+      "kind": "server",
+      "start": ["go", "run", "."],
+      "port": 8080,
+      "port_env": "PORT",
+      "health": { "path": "/healthz", "expect_status": [200] }
+    }
+  ]
+}
